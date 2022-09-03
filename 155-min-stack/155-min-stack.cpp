@@ -6,11 +6,10 @@ public:
     }
     
     void push(int val) {
-        if(arr.size()==0)
+        if(arr.empty())
             arr.push_back({val,val});
-        else if(arr.back().second < val)
-            arr.push_back({val,arr.back().second});
-        else arr.push_back({val,val});
+        else
+            arr.push_back({val,min(arr.back().second,val)});
     }
     
     void pop() {
