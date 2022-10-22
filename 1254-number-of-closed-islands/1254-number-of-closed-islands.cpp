@@ -44,14 +44,6 @@ public:
             }
         }
         
-        for(int i=0; i<m; i++){
-            cout<<"[";
-            for(int j=0; j<n; j++){
-                cout<<grid[i][j]<<" ";
-            }
-            cout<<"]"<<endl;
-        }
-
         return res;
     }
 };
