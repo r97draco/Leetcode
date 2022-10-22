@@ -37,18 +37,10 @@ public:
             for(int j=0; j<n; j++){
                 if(grid[i][j]==1){
                     res += dfs(grid, i, j);
-                    cout<<"res incs."<<" ";
                 }
             }
         }
-        for(int i=0; i<m; i++){
-            cout<<"[";
-            for(int j=0; j<n; j++){
-                cout<<grid[i][j]<<" ";
-            }
-            cout<<"]"<<endl;
-        }
-
+    
         return res;
 
     }
