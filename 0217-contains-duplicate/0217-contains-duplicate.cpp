@@ -1,7 +1,11 @@
 class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
-        set<int> n(nums.begin(), nums.end());
-        return n.size()==nums.size()?false:true;
+        sort(nums.begin(),nums.end());
+        // if(nums.back()!=nums.size())return true;
+        for(int i=0; i<nums.size()-1; i++){
+            if(nums[i]==nums[i+1])return true;
+        }
+        return false;
     }
 };
