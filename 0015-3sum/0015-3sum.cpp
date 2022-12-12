@@ -8,6 +8,7 @@ public:
             if(i>0 && n[i-1]==n[i]){
                 continue;
             }
+            if(n[i]>0)return result;
             for(int j=i+1, k=sz-1; j<k;){
                 if(n[i]+n[j]+n[k] == 0){
                     vector<int> res={n[i],n[j++],n[k]};
