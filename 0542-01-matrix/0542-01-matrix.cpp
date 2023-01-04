@@ -33,7 +33,20 @@ public:
         // }
         
         
-        int m = mat.size(), n = mat[0].size(), INF = m + n; // The distance of cells is up to (M+N)
+//         for(int i=1; i<m; i++){
+//             for(int j=1; j<n; j++){
+//                 if(mat[i][j]==0)continue;
+//                 mat[i][j]= min(mat[i-1][j], mat[i][j-1]);
+//             }
+//         }
+        
+//         for(int i=m-2; i>=0; i--){
+//             for(int j=n-2; j>=0; j--){
+//                 if(mat[i][j]==0)continue;
+//                 mat[i][j]=min(mat[i][j], 1+ (mat[i+1][j],mat[i][j+1]));
+//             }
+//         }
+              int m = mat.size(), n = mat[0].size(), INF = m + n; // The distance of cells is up to (M+N)
         for (int r = 0; r < m; r++) {
             for (int c = 0; c < n; c++) {
                 if (mat[r][c] == 0) continue;
@@ -52,6 +65,7 @@ public:
                 mat[r][c] = min(mat[r][c], min(bottom, right) + 1);
             }
         }
+        
         return mat;
     }
 };
