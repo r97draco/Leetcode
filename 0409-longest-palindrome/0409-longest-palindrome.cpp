@@ -1,20 +1,16 @@
 class Solution {
 public:
     int longestPalindrome(string s) {
-       map<char, int> hash;
+       map<char, int> db;
         for(auto i: s){
-            hash[i]++;
+            db[i]++;
+        }
+        int carry=0, sum=0;
+        for(auto i: db){
+            if(!carry && (i.second %2 == 1)) carry=1;
+            sum += ( i.second / 2) * 2;
         }
         
-        int flag=0, res=0;
-        for(auto i: hash){
-          if(i.second%2 == 0)res+=i.second;
-            else if(i.second % 2 == 1){
-                flag=1;
-                res+=( i.second - 1);
-            }
-        }
-        if(flag)res++;
-        return res;
+        return sum+carry;
     }
 };
