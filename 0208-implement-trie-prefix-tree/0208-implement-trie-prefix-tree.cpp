@@ -11,9 +11,9 @@ public:
     Trie() {
         ROOT= new Node();
     }
-    //Fixed memory Leak
+    //Fixed memory Leak but it will take twice the time.
     ~Trie(){
-        clear(ROOT);
+        // clear(ROOT);
     }
     
     void insert(string word) {
