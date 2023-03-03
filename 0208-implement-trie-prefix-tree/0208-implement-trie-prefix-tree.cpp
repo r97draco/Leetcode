@@ -1,18 +1,27 @@
 class Trie {
 private:
-    Trie* node[26]={};
-    bool isword= false;
+    class Node{
+     public:
+        Node* node[26]={};
+        bool isword= false;
+    };
+    
 public:
+    Node* ROOT;
     Trie() {
-
+        ROOT= new Node();
+    }
+    //Fixed memory Leak
+    ~Trie(){
+        clear(ROOT);
     }
     
     void insert(string word) {
-        Trie * root = this;
+        Node* root = ROOT;
         for(char x: word){
             x-='a';
             if(root->node[x]==NULL){
-                root->node[x]= new Trie();
+                root->node[x]= new Node();
             }
             root = root->node[x];
         }
@@ -20,7 +29,7 @@ public:
     }
     
     bool search(string word) {
-        Trie* root= this;
+        Node* root = ROOT;
         for(auto i: word){
             char x = i-'a';
             if(root->node[x]!=NULL){
@@ -31,7 +40,7 @@ public:
     }
     
     bool startsWith(string prefix) {
-        Trie* root= this;
+        Node* root = ROOT;
         for(auto i: prefix){
             char x = i-'a';
             if(root->node[x]!=NULL){
@@ -39,6 +48,16 @@ public:
             }else return false;
         }
         return root!=NULL;
+    }
+    
+    void clear(Node* root){
+        for(int i=0; i<26; i++){
+            if(root->node[i]!= nullptr){
+                clear(root->node[i]);
+            }
+        }
+        cout<<root<<" ";
+        delete root;
     }
 };
 
