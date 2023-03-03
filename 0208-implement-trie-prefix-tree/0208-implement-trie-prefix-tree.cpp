@@ -1,48 +1,44 @@
-
 class Trie {
-    class Node{
-        public:
-        
-        Node * node[26];
-        bool isword;
-        Node(){
-            memset(node, 0, sizeof(node));
-            isword= false;
-        }
-    };
+private:
+    Trie* node[26]={};
+    bool isword= false;
 public:
-    Node * Tnode;
-    
     Trie() {
-        Tnode= new Node();
+
     }
     
     void insert(string word) {
-        Node *p = Tnode;
-        for(int i=0; i<word.size(); i++){
-            if( p->node[word[i]-'a']==NULL )
-                p->node[word[i]-'a']= new Node();
-            p= p->node[word[i]-'a'];
+        Trie * root = this;
+        for(char x: word){
+            x-='a';
+            if(root->node[x]==NULL){
+                root->node[x]= new Trie();
+            }
+            root = root->node[x];
         }
-        p->isword= true;
+        root->isword= true;
     }
     
     bool search(string word) {
-        Node *p = find(word);
-        return p != NULL && p -> isword;
+        Trie* root= this;
+        for(auto i: word){
+            char x = i-'a';
+            if(root->node[x]!=NULL){
+                root = root->node[x];
+            }else return false;
+        }
+        return root->isword;
     }
     
     bool startsWith(string prefix) {
-        return find(prefix)!= NULL;
-    }
-    
-    private:
-    Node* find(string key)
-    {
-        Node *p = Tnode;
-        for(int i = 0; i < key.size() && p != NULL; ++ i)
-            p = p -> node[key[i] - 'a'];
-        return p;
+        Trie* root= this;
+        for(auto i: prefix){
+            char x = i-'a';
+            if(root->node[x]!=NULL){
+                root = root->node[x];
+            }else return false;
+        }
+        return root!=NULL;
     }
 };
 
