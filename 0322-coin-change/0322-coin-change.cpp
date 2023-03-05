@@ -5,10 +5,9 @@ public:
         vector<int> dp(amount + 1, Max);
         dp[0] = 0;
         for (int i = 1; i <= amount; i++) {
-            for (int j = 0; j < coins.size(); j++) {
-                if (coins[j] <= i) {
-                    dp[i] = min(dp[i], dp[i - coins[j]] + 1);
-                }
+            for (auto coin: coins) {
+                if(i-coin >=0)
+                    dp[i]=min(dp[i], 1+ dp[i-coin]);
             }
         }
         return dp[amount]==Max?-1: dp[amount];
