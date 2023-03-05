@@ -1,18 +1,17 @@
 impl Solution {
     pub fn coin_change(coins: Vec<i32>, amount: i32) -> i32 {
-        let max = amount + 1;
-        let mut dp = vec![max; (amount + 1) as usize];
-        dp[0] = 0;
-        for i in 1..=amount {
-            for coin in coins.iter() {
-                if (i - coin) >= 0 {
-                    dp[i as usize] = std::cmp::min(dp[i as usize], 1 + dp[(i - coin) as usize]);
-                }
+        let mut changes = vec![amount+1; (amount+1) as usize];
+        changes[0] = 0;
+        for i in 1..(amount+1) as usize {
+            for &coin in &coins {
+                let coin = coin as usize;
+                if coin > i {continue};
+
+                changes[i] = changes[i].min(changes[i-coin] + 1);
             }
         }
-        if dp[amount as usize] == max {
-            return -1;
-        }
-        dp[amount as usize]
+
+        let change = changes[amount as usize];
+        if change == amount+1 {-1} else {change}
     }
 }
