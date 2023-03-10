@@ -25,11 +25,8 @@ public:
     int search(vector<int>& n, int target) {
         int low = 0, high = n.size()-1, mid;
         int mp=high, res =-1, flag=1;
-        if(n[low]<= n[high]){
-            
-        }
-        else{
-            cout<<"find mp"<<endl;
+        if(n[low]> n[high]){
+          cout<<"find mp"<<endl;
             while(low<=high){
                 if(!flag)break;
                 mid= (low + high)/2;
@@ -43,7 +40,7 @@ public:
                 else{
                     high = mid;
                 }
-            }
+            }  
         }
         cout<< mp<<endl;
         
