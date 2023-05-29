@@ -9,10 +9,10 @@ public:
             s+=word2[j];
         }
         if(i!=m){
-            for(; i<m; i++)s+=word1[i];
+            s+=word1.substr(i, m);
         }
         if(j!=n){
-            for(; j<n; j++)s+=word2[j];
+            s+=word2.substr(j,n);
         }
         return s;
     }
