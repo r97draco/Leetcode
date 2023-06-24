@@ -10,47 +10,43 @@
  */
 class Solution {
 public:
-    ListNode* addTwoNumbers(ListNode* a, ListNode* b) {
-        ListNode *c= new ListNode(-1);
-        ListNode *ans=c;
-        int r= 0, k=0;
-        while(a || b){
-            if(a && b){
-                int va = a->val+ b->val + k;
-                r = va%10;
-                k = va/10;
-                ListNode *tmp = new ListNode(r);
-                c->next=tmp;
-                c=c->next;
-                
-                a= a->next;
-                b= b->next;
-            }
-            else if(a){
-                int va = a->val + k;
-                r = va%10;
-                k = va/10;
-                ListNode *tmp = new ListNode(r);
-                c->next=tmp;
-                c=c->next;
-                
-                a=a->next;
-            }
-            else{
-                int va = b->val + k;
-                r = va%10;
-                k = va/10;
-                ListNode *tmp = new ListNode(r);
-                c->next=tmp;
-                c=c->next;
-                
-                b=b->next;
-            }
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode *res = new ListNode(-1);
+        ListNode *ans = res;
+        int carry = 0;
+        while(l1 && l2){
+            int sum = l1->val + l2->val + carry;
+            carry = sum/10;
+            sum = sum%10;
+            ListNode* tmp = new ListNode(sum);
+            ans->next = tmp;
+            ans = ans->next;
+            
+            l1= l1->next;
+            l2= l2->next;
         }
-        if(k) {
-            ListNode * tmp = new ListNode(1);
-            c->next=tmp;
+        while(l1){
+            int sum = l1->val+ carry;
+            carry = sum/10;
+            sum = sum%10;
+            ListNode* tmp = new ListNode(sum);
+            ans->next = tmp;
+            ans = ans->next;
+            l1= l1->next;
         }
-        return ans->next;
+        while(l2){
+            int sum = l2->val+ carry;
+            carry = sum/10;
+            sum = sum%10;
+            ListNode* tmp = new ListNode(sum);
+            ans->next = tmp;
+            ans = ans->next;
+            l2= l2->next;
+        }
+        if(carry){
+           ListNode* tmp = new ListNode(1);
+            ans->next = tmp;
+        }
+        return res->next;
     }
 };
