@@ -1,6 +1,6 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        st = dict()
+        st = {}
         for index in range(0,len(nums)):
             if target - nums[index] in st:
                 return [index, st[target-nums[index]]]
