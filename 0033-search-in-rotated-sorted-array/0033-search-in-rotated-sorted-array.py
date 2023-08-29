@@ -14,6 +14,7 @@ class Solution:
                     l = mid + 1
                 else :
                     r = mid - 1
+            #right sorted portion
             else:
                 if target < nums[mid] or target > nums[r]:
                     r = mid - 1
