@@ -1,20 +1,25 @@
 class Solution {
 public:
-    vector<vector<int>> threeSum(vector<int>& n) {
-        sort(n.begin(), n.end());
-        vector<vector<int>> res;
-        int l=0, sz= n.size(), r= sz-1, mid, target=0;
-        for(int i = 0; i< sz-1; i++){
-            if(i>0 && i< sz-2 && n[i]==n[i-1]) continue;
-            for(l=i+1, r=sz-1; l<r; ){
-                if(n[l]+n[r]+n[i]== target){
-                    vector<int> ans={n[i],n[l],n[r]};
-                    res.push_back(ans);
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> res ;
+        int sz = nums.size();
+        sort(nums.begin(), nums.end());
+        for(int i=0; i<sz-2; i++){
+            if(i>0 && nums[i]==nums[i-1])continue;
+            int l=i+1, r = sz-1;
+            while(l<r){
+                if(nums[i] + nums[l] + nums[r] == 0){
+                    cout<<i<<"-"<<l<<"-"<<r<<endl;
+                    vector<int> tmp{nums[i],nums[l],nums[r]};
+                    res.push_back(tmp);
                     l++;
-                    while(l<r && n[l]==n[l-1])l++;
+                    while( l<sz && nums[l-1] == nums[l] )l++;
+                }else if(nums[i] + nums[l] + nums[r] < 0){
+                    l++;
                 }
-                else if(n[l]+n[r]+n[i] < target) l++;
-                else r--;
+                else {
+                    r--;
+                }
             }
         }
         return res;
