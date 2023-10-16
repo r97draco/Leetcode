@@ -1,17 +1,19 @@
 class Solution {
 public:
-    int countOne(int n){
-        int count = 0;
+    int hammingWeight(int n) {
+        int cn= 0;
         while(n){
-            count += (n&1);
-            n= n>>1;
+            cn+= (n&1);
+            n = n>>1;
         }
-        return count;
+        return cn;
     }
     vector<int> countBits(int n) {
-       vector<int> res(n+1);
-        for(int i=0; i<= n; i++){
-            res[i]= countOne(i);
+        vector<int> res;
+        int i=0;
+        while(i!= n+1){
+            res.push_back(hammingWeight(i));
+            i++;
         }
         return res;
     }
