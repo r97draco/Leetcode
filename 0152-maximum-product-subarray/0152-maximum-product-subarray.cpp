@@ -1,13 +1,14 @@
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
-        int sz= nums.size(), maxEndHere= nums[0], maxYet = nums[0], minEndHere= nums[0];
-
-        for(int i=1; i<sz; i++){
-        if(nums[i]<0)swap(maxEndHere, minEndHere);
-        maxEndHere = max(nums[i], maxEndHere * nums[i]);
-        minEndHere = min(nums[i], minEndHere * nums[i]);
-        maxYet = max(maxYet, maxEndHere);
+        int maxEndHere=nums[0], minEndHere=nums[0], maxYet=maxEndHere;
+        for(int i=1; i<nums.size(); i++){
+            if(nums[i]<0){
+                swap(maxEndHere, minEndHere);
+            }
+            minEndHere = min(nums[i], nums[i]*minEndHere);
+            maxEndHere = max(nums[i], nums[i]*maxEndHere);
+            maxYet = max(maxYet, maxEndHere);
         }
         return maxYet;
     }
